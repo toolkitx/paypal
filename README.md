@@ -14,11 +14,11 @@ npm install @toolkitx/paypal
 Get instance
 ```ts
 import {Paypal, PaypalPageResponse} from '@toolkitx/paypal';
-const fastSprint = new Paypal('YOUR_USER_NAME', 'YOUR_PASSWORD');
+const paypal = new Paypal('clientId', 'clientSecret', true);
 ```
 Chain
 ```ts
-fastSprint
+paypal
 .api('URL')
 .head(key, value)
 .query({key: 'value'})
@@ -26,42 +26,28 @@ fastSprint
 // or .post(payload)
 ```
 
-* Get accounts
+* Get products
 
 ```ts
-const accounts: PaypalPageResponse = await fastSprint.accounts().get();
+const products: PaypalPageResponse = await paypal.products().get();
 ```
 
-* Get single account
+* Get single product
 
 ```ts
-const account = await fastSprint.accounts('ACCOUNT_ID').get();
+const product = await paypal.products('Product id').get();
 ```
 
 
-* Query accounts
+* Query products
 
 ```ts
-const accounts = await fastSprint.accounts().query({email: 'EXAMPLE@EMAIL'}).get();
-```
-
-* Create Session
-```ts
-const payload = {
-    account: 'YOUR_ACCOUNT_ID',
-    items: [
-        {
-            product: 'YOUR_PRODUCT_ID',
-            quantity: 1,
-        },
-    ],
-};
-const session = await fastSprint.sessions().post(payload);
+const v = await paypal.products().query({param1: 'EXAMPLE'}).get();
 ```
 
 ## Custom Request
 ```ts
-await fastSprint.api('RELATE_URL').get();
-await fastSprint.api('RELATE_URL').post(payload);;
+await paypal.api('RELATE_URL').get();
+await paypal.api('RELATE_URL').post(payload);;
 ```
 
