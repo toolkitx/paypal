@@ -1,20 +1,20 @@
-# @toolkitx/fastspring
+# @toolkitx/paypal
 
-[![npm version](https://img.shields.io/npm/v/@toolkitx/fastspring.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/fastspring)
-[![npm downloads](https://img.shields.io/npm/dm/@toolkitx/fastspring.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/fastspring)
+[![npm version](https://img.shields.io/npm/v/@toolkitx/paypal.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/paypal)
+[![npm downloads](https://img.shields.io/npm/dm/@toolkitx/paypal.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/paypal)
 
 ## Installing
 Using npm
 
 ```
-npm install @toolkitx/fastspring
+npm install @toolkitx/paypal
 ```
 
 ## Example
 Get instance
 ```ts
-import {FastSpring, FastSpringPageResponse} from '@toolkitx/fastspring';
-const fastSprint = new FastSpring('YOUR_USER_NAME', 'YOUR_PASSWORD');
+import {Paypal, PaypalPageResponse} from '@toolkitx/paypal';
+const fastSprint = new Paypal('YOUR_USER_NAME', 'YOUR_PASSWORD');
 ```
 Chain
 ```ts
@@ -29,7 +29,7 @@ fastSprint
 * Get accounts
 
 ```ts
-const accounts: FastSpringPageResponse = await fastSprint.accounts().get();
+const accounts: PaypalPageResponse = await fastSprint.accounts().get();
 ```
 
 * Get single account

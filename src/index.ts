@@ -1,9 +1,9 @@
-import {FastSpring} from './FastSpring';
-import {FastSpringRequest} from './FastSpringRequest';
-import {FastSpringPageResponse} from './models';
+import { PayPal } from './PayPal';
+import { PayPalRequest } from './PayPalRequest';
+import { PayPalResponse } from './models';
 
 export {
-    FastSpring,
-    FastSpringRequest,
-    FastSpringPageResponse
+    PayPal,
+    PayPalRequest,
+    PayPalResponse
 };

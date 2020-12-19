@@ -1,6 +1,6 @@
 {
-  "name": "@toolkitx/fastspring",
-  "version": "0.0.6",
+  "name": "@toolkitx/paypal",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,12 +13,12 @@
     "prelib:publish": "npm run lib:update-version && npm run build",
     "lib:update-version": "npm version patch",
     "lib:publish": "npm publish --access=public",
-    "lib:unpublish": "npm unpublish @toolkitx/fastspring@0.0.4"
+    "lib:unpublish": "npm unpublish @toolkitx/paypal@0.0.1"
   },
   "author": "toolkitx.net",
   "repository": {
     "type": "git",
-    "url": "https://github.com/toolkitx/fastspring.git"
+    "url": "https://github.com/toolkitx/paypal.git"
   },
   "license": "MIT",
   "devDependencies": {

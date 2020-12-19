@@ -2,14 +2,14 @@ import {AxiosRequestConfig} from "axios";
 
 const axios = require('axios').default;
 
-export class FastSpringRequest {
+export class PayPalRequest {
     requestConfig: AxiosRequestConfig = {};
 
-    constructor(host: string, username: string, password: string) {
+    constructor(host: string, clientId: string, clientSecret: string) {
         this.requestConfig.baseURL = host;
         this.requestConfig.auth = {
-            username: username,
-            password: password
+            username: clientId,
+            password: clientSecret
         }
     }
 
@@ -48,8 +48,8 @@ export class FastSpringRequest {
     }
 
     private send() {
-        return new Promise<any>((resolve, reject) => {
-            axios(this.requestConfig).then(({data}) => {
+        return new Promise<any>(async (resolve, reject) => {
+            axios(this.requestConfig).then(({ data }) => {
                 resolve(data);
             }, (err) => {
                 reject(err);
