@@ -1,10 +1,13 @@
-import { account } from './config';
-import { PayPal, PayPalResponse } from '../src/index';
+import {account} from './config';
+import {PayPal, PayPalResponse} from '../src/index';
+import {PayPalRestConf} from '../src/models';
 
 const assert = require('assert');
 
-const payPal = new PayPal(account.clientId, account.clientSecret);
+const payPal = new PayPal(new PayPalRestConf(account.clientId, account.clientSecret));
 const testProductId = 'PROD-57E56685GE775083V';
+const testPlanId = 'P-1VY42609UU166425RL6I5MUQ';
+const testSubscriptionId = 'I-FJBN6BDTBL67';
 
 describe('PayPal product', () => {
     it('should get list', async () => {
@@ -17,7 +20,7 @@ describe('PayPal product', () => {
     it('should get by id', async () => {
         const resource = await payPal.products(testProductId).get();
         assert(resource.links.length > 0);
-        assert.equal(testProductId, resource.id);
+        assert(testProductId, resource.id);
     });
 });
 
@@ -29,31 +32,34 @@ describe('PayPal plans', () => {
         assert(paging);
     });
     it('should list plans by product id', async () => {
-        const res = await payPal.plans().query({ product_id: testProductId }).get();
+        const res = await payPal.plans().query({product_id: testProductId}).get();
         assert(res);
     });
 
-    it('should get inactive plan by id', async () => {
-        const id = 'P-8E481396N58545033LZACYLI';
-        const resource = await payPal.plans(id).get();
-        assert.equal(id, resource.id);
-        assert.equal('INACTIVE', resource.status);
+    it('should get plan by id', async () => {
+        const resource = await payPal.plans(testPlanId).get();
+        assert(testPlanId, resource.id);
     });
 
-    it('should get active plan by id', async () => {
-        const id = 'P-1VY42609UU166425RL6I5MUQ';
-        const resource = await payPal.plans(id).get();
-        assert.equal(id, resource.id);
-        assert.equal('ACTIVE', resource.status);
+    it('should deactivate plan by id', async () => {
+        await payPal.plans(testPlanId).deactivate().post();
+        const resource = await payPal.plans(testPlanId).get();
+        assert('INACTIVE', resource.status);
+    });
+
+    it('should activate plan by id', async () => {
+        await payPal.plans(testPlanId).activate().post();
+        const resource = await payPal.plans(testPlanId).get();
+        assert('ACTIVE', resource.status);
     });
 });
 
 
-describe('PayPal subscriptions', () => {
+xdescribe('PayPal subscriptions', () => {
     let subscriptionId: string;
-    it('should create subscription', async () => {
+    xit('should create subscription', async () => {
         const subscription = {
-            "plan_id": "P-1VY42609UU166425RL6I5MUQ",
+            "plan_id": testPlanId,
             "start_time": "2020-12-20T06:00:00Z",
             "subscriber": {
                 "name": {
@@ -81,23 +87,32 @@ describe('PayPal subscriptions', () => {
         assert(res);
     });
 
-
     it('should get by id', async () => {
-        const resource = await payPal.subscriptions(subscriptionId).get();
-        assert.equal(subscriptionId, resource.id);
+        const resource = await payPal.subscriptions(testSubscriptionId).get();
+        assert(testSubscriptionId, resource.id);
     });
 
-    it('should active by id', async () => {
-        const resource = await payPal.subscriptions(`${subscriptionId}/active`).post({
-            "reason": "Not satisfied with the service"
+    it('should suspend by id', async () => {
+        await payPal.subscriptions(testSubscriptionId).suspend().post({
+            "reason": "suspend test"
         });
-        assert(resource);
+        const resource = await payPal.subscriptions(testSubscriptionId).get();
+        assert('SUSPENDED', resource.status);
+    });
+
+    it('should activate by id', async () => {
+        await payPal.subscriptions(testSubscriptionId).activate().post({
+            "reason": "activate test"
+        });
+        const resource = await payPal.subscriptions(testSubscriptionId).get();
+        assert('ACTIVE', resource.status);
     });
 
     it('should cancel by id', async () => {
-        const resource = await payPal.subscriptions(`${subscriptionId}/cancel`).post({
-            "reason": "Not satisfied with the service"
+        await payPal.subscriptions(testSubscriptionId).cancel().post({
+            "reason": "cancel test"
         });
-        assert(resource);
+        const resource = await payPal.subscriptions(testSubscriptionId).get();
+        assert('CANCELLED', resource.status);
     });
 });

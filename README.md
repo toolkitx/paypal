@@ -38,16 +38,25 @@ const products: PaypalPageResponse = await paypal.products().get();
 const product = await paypal.products('Product id').get();
 ```
 
-
 * Query products
 
 ```ts
 const v = await paypal.products().query({param1: 'EXAMPLE'}).get();
 ```
 
+* Suspend subscription
+
+```ts
+await payPal.subscriptions('id').suspend().post({
+    "reason": "suspend reason"
+});
+```
+
 ## Custom Request
+
 ```ts
 await paypal.api('RELATE_URL').get();
-await paypal.api('RELATE_URL').post(payload);;
+await paypal.api('RELATE_URL').post(payload);
+;
 ```
 

@@ -22,3 +22,14 @@ export interface PayPalToken {
     app_id: string;
     expires_in: string;
 }
+
+export type PayPalRestMode = 'Sandbox' | 'Live';
+
+export class PayPalRestConf {
+    constructor(public clientId: string, public clientSecret: string, public mode: PayPalRestMode = 'Sandbox', public version: string = 'v1') {
+    }
+
+    get host() {
+        return `${this.mode.toLowerCase() === 'sandbox' ? WellKnownPayPalHosts.SANDBOX : WellKnownPayPalHosts.LIVE}/${this.version.toLowerCase()}`;
+    }
+}

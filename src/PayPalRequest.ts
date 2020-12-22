@@ -1,20 +1,26 @@
 import {AxiosRequestConfig} from "axios";
+import {PayPalRestConf} from './models';
 
 const axios = require('axios').default;
 
 export class PayPalRequest {
     requestConfig: AxiosRequestConfig = {};
 
-    constructor(host: string, clientId: string, clientSecret: string) {
-        this.requestConfig.baseURL = host;
+    constructor(protected conf: PayPalRestConf, protected url: string) {
+        this.requestConfig.baseURL = conf.host;
+        this.requestConfig.url = url;
         this.requestConfig.auth = {
-            username: clientId,
-            password: clientSecret
+            username: conf.clientId,
+            password: conf.clientSecret
         }
     }
 
-    url(url: string) {
-        this.requestConfig.url = url;
+    version() {
+
+    }
+
+    appendUrl(path: string) {
+        this.requestConfig.url = `${this.requestConfig.url}${path}`;
         return this;
     }
 
@@ -41,7 +47,7 @@ export class PayPalRequest {
         return this.send();
     }
 
-    post(body: any) {
+    post(body?: any) {
         this.requestConfig.method = 'POST';
         this.requestConfig.data = body;
         return this.send();
