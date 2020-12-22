@@ -1,6 +1,6 @@
 export const WellKnownPayPalHosts = {
-    LIVE: 'https://api.paypal.com',
-    SANDBOX: 'https://api.sandbox.paypal.com'
+    LIVE: 'https://api-m.paypal.com',
+    SANDBOX: 'https://api-m.sandbox.paypal.com'
 }
 
 export interface PayPalResponseLink {
@@ -23,10 +23,8 @@ export interface PayPalToken {
     expires_in: string;
 }
 
-export type PayPalRestMode = 'Sandbox' | 'Live';
-
-export class PayPalRestConf {
-    constructor(public clientId: string, public clientSecret: string, public mode: PayPalRestMode = 'Sandbox', public version: string = 'v1') {
+export class PayPalApiConf {
+    constructor(public clientId: string, public clientSecret: string, public mode: 'Sandbox' | 'Live' = 'Sandbox', public version: string = 'v1') {
     }
 
     get host() {

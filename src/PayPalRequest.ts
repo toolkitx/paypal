@@ -1,12 +1,12 @@
 import {AxiosRequestConfig} from "axios";
-import {PayPalRestConf} from './models';
+import {PayPalApiConf} from './models';
 
 const axios = require('axios').default;
 
 export class PayPalRequest {
     requestConfig: AxiosRequestConfig = {};
 
-    constructor(protected conf: PayPalRestConf, protected url: string) {
+    constructor(protected conf: PayPalApiConf, protected url: string) {
         this.requestConfig.baseURL = conf.host;
         this.requestConfig.url = url;
         this.requestConfig.auth = {

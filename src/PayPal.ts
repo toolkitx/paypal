@@ -1,25 +1,13 @@
 import {PayPalRequest} from "./PayPalRequest";
-import {PayPalRestConf, PayPalRestMode, PayPalToken, WellKnownPayPalHosts} from './models';
+import {PayPalApiConf} from './models';
 
-const axios = require('axios').default;
+export class PayPal {
 
-export class PayPalRest {
-    constructor(protected conf: PayPalRestConf) {
+    constructor(protected conf: PayPalApiConf) {
     }
 
     api(api: string) {
         return new PayPalRequest(this.conf, api);
-    }
-
-    protected getApiUrl(api: string, optPath?: string) {
-        return optPath ? `${api}/${optPath}` : api;
-    }
-}
-
-export class PayPal extends PayPalRest {
-
-    constructor(protected conf: PayPalRestConf) {
-        super(conf);
     }
 
     products(id?: string) {
@@ -33,12 +21,16 @@ export class PayPal extends PayPalRest {
     subscriptions(id?: string) {
         return new PayPalSubscriptionRequest(this.conf, this.getApiUrl('/billing/subscriptions', id));
     }
+
+    protected getApiUrl(api: string, optPath?: string) {
+        return optPath ? `${api}/${optPath}` : api;
+    }
 }
 
 
 export class PayPalPlanRequest extends PayPalRequest {
 
-    constructor(protected conf: PayPalRestConf, protected url: string) {
+    constructor(protected conf: PayPalApiConf, protected url: string) {
         super(conf, url);
     }
 
@@ -58,7 +50,7 @@ export class PayPalPlanRequest extends PayPalRequest {
 
 export class PayPalSubscriptionRequest extends PayPalRequest {
 
-    constructor(protected conf: PayPalRestConf, protected url: string) {
+    constructor(protected conf: PayPalApiConf, protected url: string) {
         super(conf, url);
     }
 
