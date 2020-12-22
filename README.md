@@ -44,7 +44,17 @@ const product = await paypal.products('Product id').get();
 const v = await paypal.products().query({param1: 'EXAMPLE'}).get();
 ```
 
-* Suspend subscription
+* Plan actions
+
+Support `activate/deactivate/updatePricingSchemes` plans
+
+```ts
+await payPal.plans(testPlanId).activate().post();
+```
+
+* Subscription actions
+
+Support `activate/cancel/suspend` subscription
 
 ```ts
 await payPal.subscriptions('id').suspend().post({
@@ -57,6 +67,5 @@ await payPal.subscriptions('id').suspend().post({
 ```ts
 await paypal.api('RELATE_URL').get();
 await paypal.api('RELATE_URL').post(payload);
-;
 ```
 
