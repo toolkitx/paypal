@@ -15,11 +15,11 @@ export class PayPalRequest {
         }
     }
 
-    version() {
-
+    version(ver: string) {
+        this.conf.version = ver;
     }
 
-    appendUrl(path: string) {
+    protected appendUrl(path: string) {
         this.requestConfig.url = `${this.requestConfig.url}${path}`;
         return this;
     }

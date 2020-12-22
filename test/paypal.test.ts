@@ -1,10 +1,9 @@
-import {account} from './config';
 import {PayPal, PayPalResponse} from '../src/index';
 import {PayPalApiConf} from '../src/models';
 
 const assert = require('assert');
 
-const payPal = new PayPal(new PayPalApiConf(account.clientId, account.clientSecret));
+const payPal = new PayPal(new PayPalApiConf(process.env.CLIENT_ID, process.env.CLIENT_SECRET));
 const testProductId = 'PROD-57E56685GE775083V';
 const testPlanId = 'P-1VY42609UU166425RL6I5MUQ';
 const testSubscriptionId = 'I-FJBN6BDTBL67';
