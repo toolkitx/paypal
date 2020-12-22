@@ -1,5 +1,6 @@
 # @toolkitx/paypal
 
+![Test](https://github.com/toolkitx/paypal/workflows/Test/badge.svg?branch=main)
 [![npm version](https://img.shields.io/npm/v/@toolkitx/paypal.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/paypal)
 [![npm downloads](https://img.shields.io/npm/dm/@toolkitx/paypal.svg?style=flat-square)](https://www.npmjs.com/package/@toolkitx/paypal)
 
