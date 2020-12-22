@@ -1,7 +1,8 @@
-name: Publish
+name: Test
 on:
-  release:
-    types: [ created ]
+  push:
+    branches:
+      - main
 jobs:
   Test:
     runs-on: ubuntu-latest
@@ -13,7 +14,7 @@ jobs:
           node-version: '12'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      # Publish to npm
-      - run: npm run lib:publish
+      - run: npm run test
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          CLIENT_ID: ${{ secrets.PAYPAL_SANDBOX_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.PAYPAL_SANDBOX_CLIENT_SECRET }}
