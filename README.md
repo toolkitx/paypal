@@ -14,7 +14,9 @@ npm install @toolkitx/paypal
 Get instance
 ```ts
 import {Paypal, PaypalPageResponse} from '@toolkitx/paypal';
-const paypal = new Paypal('clientId', 'clientSecret', true);
+
+const conf = new PayPalApiConf('CLIENT_ID', 'CLIENT_SECRET', 'Sandbox|Live', 'v1');
+const paypal = new Paypal(conf);
 ```
 Chain
 ```ts
