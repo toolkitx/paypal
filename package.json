@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha --require ts-node/register --timeout 20000 test/*.ts",
     "build": "tsc",
-    "prelib:publish": "npm run lib:update-version && npm run build",
+    "prelib:publish": "npm run build",
     "lib:update-version": "npm version patch",
     "lib:publish": "npm publish --access=public",
     "lib:unpublish": "npm unpublish @toolkitx/paypal@0.0.1"
