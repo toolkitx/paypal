@@ -1,9 +1,9 @@
 import {PayPalRequest} from "./PayPalRequest";
-import {PayPalApiConf} from './models';
+import {PayPalEnvironment} from './models';
 
 export class PayPal {
 
-    constructor(protected conf: PayPalApiConf) {
+    constructor(protected conf: PayPalEnvironment) {
     }
 
     api(api: string) {
@@ -30,7 +30,7 @@ export class PayPal {
 
 export class PayPalPlanRequest extends PayPalRequest {
 
-    constructor(protected conf: PayPalApiConf, protected url: string) {
+    constructor(protected conf: PayPalEnvironment, protected url: string) {
         super(conf, url);
     }
 
@@ -50,7 +50,7 @@ export class PayPalPlanRequest extends PayPalRequest {
 
 export class PayPalSubscriptionRequest extends PayPalRequest {
 
-    constructor(protected conf: PayPalApiConf, protected url: string) {
+    constructor(protected conf: PayPalEnvironment, protected url: string) {
         super(conf, url);
     }
 

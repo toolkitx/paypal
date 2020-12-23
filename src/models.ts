@@ -23,7 +23,7 @@ export interface PayPalToken {
     expires_in: string;
 }
 
-export class PayPalApiConf {
+export class PayPalEnvironment {
     constructor(public clientId: string, public clientSecret: string, public mode: 'Sandbox' | 'Live' = 'Sandbox', public version: string = 'v1') {
     }
 
