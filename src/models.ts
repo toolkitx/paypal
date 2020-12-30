@@ -1,6 +1,6 @@
 export const WellKnownPayPalHosts = {
-    LIVE: 'https://api-m.paypal.com',
-    SANDBOX: 'https://api-m.sandbox.paypal.com'
+    LIVE: 'https://api.paypal.com',
+    SANDBOX: 'https://api.sandbox.paypal.com'
 }
 
 export interface PayPalResponseLink {
